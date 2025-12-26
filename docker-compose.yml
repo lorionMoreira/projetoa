@@ -1,19 +1,16 @@
-version: '3.8'
-
 services:
   projetoa:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: projetoa-prod
-    ports:
-      - "3000:80"
     restart: unless-stopped
     environment:
       - NODE_ENV=production
     networks:
-      - app-network
+      - master_proxy_default
 
 networks:
-  app-network:
-    driver: bridge
+  master_proxy_default:
+    external: true
+    name: master_proxy_default  
