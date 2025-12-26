@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  projetoa-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: projetoa-dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+    networks:
+      - master_proxy_default
+
+networks:
+  master_proxy_default:
+    external: true
+    name: master_proxy_default
